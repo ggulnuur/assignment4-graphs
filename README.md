@@ -226,3 +226,95 @@ Overall, this project improved my understanding of graph data structures, recurs
 
 ---
 
+# Bonus Task – Dijkstra’s Algorithm
+
+## Overview
+As a bonus task, Dijkstra’s Algorithm was implemented to find the shortest path from a starting vertex to all other vertices in the graph.
+
+## Requirements Completed
+- Added support for weighted edges
+- Modified the Edge class by adding a weight field
+- Updated graph structure to store weighted edges
+- Implemented `void dijkstra(int start)` method
+
+## Edge Class Example
+
+```java
+class Edge {
+    Vertex destination;
+    int weight;
+
+    public Edge(Vertex destination, int weight) {
+        this.destination = destination;
+        this.weight = weight;
+    }
+}
+```
+
+## Dijkstra Algorithm
+
+```java
+public void dijkstra(int start) {
+    int[] distance = new int[vertices];
+    boolean[] visited = new boolean[vertices];
+
+    Arrays.fill(distance, Integer.MAX_VALUE);
+    distance[start] = 0;
+
+    for (int i = 0; i < vertices - 1; i++) {
+
+        int min = Integer.MAX_VALUE;
+        int u = -1;
+
+        for (int j = 0; j < vertices; j++) {
+            if (!visited[j] && distance[j] < min) {
+                min = distance[j];
+                u = j;
+            }
+        }
+
+        visited[u] = true;
+
+        for (Edge edge : adjacencyList[u]) {
+            int v = edge.destination.id;
+
+            if (!visited[v] &&
+                distance[u] != Integer.MAX_VALUE &&
+                distance[u] + edge.weight < distance[v]) {
+
+                distance[v] = distance[u] + edge.weight;
+            }
+        }
+    }
+
+    System.out.println("Shortest distances from vertex " + start + ":");
+
+    for (int i = 0; i < vertices; i++) {
+        System.out.println("To vertex " + i + " = " + distance[i]);
+    }
+}
+```
+
+## Functionality
+The algorithm:
+- Takes a starting vertex
+- Computes shortest paths to all vertices
+- Outputs the shortest distances clearly
+
+## Data Structure
+The implementation uses:
+- Weighted adjacency list
+- Arrays for distances
+- Arrays for visited vertices
+- Simple loops without priority queue
+
+## Example Output
+
+```text
+Shortest distances from vertex 0:
+To vertex 1 = 4
+To vertex 2 = 7
+To vertex 3 = 9
+```
+
+
