@@ -3,13 +3,13 @@ public class Experiment {
     public void runTraversals(Graph g) {
 
         long startBFS = System.nanoTime();
-        g.bfs(0);
+        g.dijkstra(0);
         long endBFS = System.nanoTime();
 
         long bfsTime = endBFS - startBFS;
 
         long startDFS = System.nanoTime();
-        g.dfs(0);
+        g.dijkstra(0);
         long endDFS = System.nanoTime();
 
         long dfsTime = endDFS - startDFS;
@@ -37,12 +37,12 @@ public class Experiment {
 
             // Add edges
             for (int i = 0; i < size - 1; i++) {
-                graph.addEdge(i, i + 1);
+                graph.addEdge(i, i + 1, 4);
             }
 
             // Extra edges
             for (int i = 0; i < size - 5; i += 5) {
-                graph.addEdge(i, i + 5);
+                graph.addEdge(i, i + 5, 2);
             }
 
             // Print only small graph
